@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<head>
+	<title>
+		AJAX PRACTICE YKNOW
+	</title>
+
+</head>
+<body>
+	<h1>AJAX plain text example</h1>
+	<div><button type="button" onclick="getNextAjax()"> Get Text</button></div><br>
+	<textarea rows="5" cols="60" id="message"></textarea>
+
+
+<script>
+	var xxxx = new XMLHttpRequest();
+
+	console.log("Created ajax client, readyState is: " + xxxx.readyState);
+	console.log("Created ajax client, Http status is: " + xxxx.status);
+
+	xxxx.open("GET","http://172.17.149.45/simple.php");
+
+	//xxxx.open("GET","simple.php");
+
+	console.log("Attempting to open, readyState is: " + xxxx.readyState);
+
+	xxxx.send();
+
+	console.log("Attempting to send, readyState is: " + xxxx.readyState);
+
+	function getNextAjax(){
+		console.log("inside function getNextAjax()");
+		writeAJAXMessage();
+
+	}
+	function writeAJAXMessage(){
+		if(xxxx.readyState == 4 && xxxx.status == 200){
+			console.log("Ready state is = to 4 and status is 200");
+		}
+	}
+</script>
+
+
+
+</body>

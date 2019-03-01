@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JavaScript</title>
+	<meta charset="utf-8">
+	<style>
+	h2 {
+		color: red;
+	}
+	h3 {
+		color: darkgreen;
+	}
+	body {
+		background-color: #F3E5AB;
+	}
+	
+	#subber{
+		border: solid 1px black;
+		padding: 10px 20px;
+		width: 25%;
+	}
+	
+	textarea {resize:none;}
+
+	table{width: auto;border-collapse: collapse; border: 1px solid white;table-layout: auto;}
+</style>
+</head>
+<body>
+	<script>
+		var grabChatInfo = new XMLHttpRequest()
+		grabChatInfo.open("Get","http://172.17.149.41/php/activeReceivers.php",true);
+		console.log(grabChatInfo.status);
+		grabChatInfo.onload = function(){
+			var data = JSON.parse(grabChatInfo.responseText);
+			console.log(data);
+			loadActiveUsers(data);
+		}
+		grabChatInfo.send();
+	
+		// Iterates through each user in Data and prints out their handles
+		function loadActiveUsers(data){
+			var activeUsers = "";
+			for (var i = 0; i < data.length; i++) {
+				activeUsers +=  data[i].handle + "<br>" ;
+			}
+			
+			document.getElementById("actives").innerHTML = activeUsers;
+			//actives.append(activeUsers);
+		}
+
+	</script>
+	<h1> Web Programming Chatter Box </h1>
+
+		<form>
+		<select name="User" id=target>
+			
+<script>
+		var updateList = new XMLHttpRequest()
+		updateList.open("Get","http://172.17.149.41/php/activeReceivers.php",true);
+		updateList.onload = function(){
+		var userdata = JSON.parse(updateList.responseText);
+		loadUserList(userdata);
+		}
+		updateList.send();
+		function loadUserList(userdata){
+			var activeUsers = "";
+			for (var i = 0; i < userdata.length; i++) {
+				activeUsers += "<option value= &quot;" + userdata[i].url + "&quot;>" + userdata[i].handle + "</option>" ;
+				console.log(userdata[i].url);
+			}
+			
+			document.getElementById("target").innerHTML = activeUsers + "<option value =&quot;test&quot;>myself</option>";
+			//actives.append(activeUsers);
+		}
+
+		var myInfo = new XMLHttpRequest();
+		myInfo.open("GET","172.17.149.41/php/activeReceivers.php?handle=yak&url=http://172.17.149.45/Assn3/receiver.php");
+		myInfo.send();
+
+</script>
+		</select>
+		<div>
+		<textarea id=message cols="50" rows=5></textarea> 		
+	</div>
+	<input type="submit" name="mess" id=subber>
+		</form>
+
+	<br><br>
+		<div> <strong> Online Users </strong></div>
+		<div id=actives>
+		</div>
+
+</body>
+
+</html>

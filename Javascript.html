@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JavaScript</title>
+	<meta charset="utf-8">
+	<style>
+	h2 {
+		color: red;
+	}
+	h3 {
+		color: darkgreen;
+	}
+	body {
+		background-color: #F3E5AB;
+	}
+	ul {
+		border-collapse: collapse;
+
+	}
+	td.movie {
+	color: brown;
+	
+	width: auto;
+	padding: 10px;
+	}
+	button.delete{
+		border: solid 1px black;
+		padding: 10px 20px;
+		width: 100%;
+	}
+	td:first-child{display: inline-block;
+		text-align: center;
+		width: 88%;
+		padding-left: 10px;
+		padding-right: 10px;
+		font-size: 12pt;
+		border: 1px solid white;
+
+	}
+	td:last-child{
+		width: 25%;
+		padding: 5px 10px;
+		border: 1px solid black;
+		background-color: white;
+
+
+	}
+	#submission {
+		width: 25%; color:white; padding: 10px 100px; border:none; background-color: black ; font-family: "Arial"; font-size: 20px;
+
+	}
+	
+
+	table{width: auto;border-collapse: collapse; border: 1px solid white;table-layout: auto;}
+
+</style>
+</head>
+<body>
+
+<h2>CSCI 4300 Movie Festival</h2>
+<h3>Our Favorite Movies </h3>
+
+<button id="Dater">Dater</button> <p> Press Dater to see the current time </p>
+<p id=test></p>
+
+<script>
+document.getElementById("Dater").addEventListener('click',deleteDate);
+function deleteDate() {
+	document.getElementById("test").innerHTML = Date();
+	document.getElementById("test").style.display='block';
+	document.getElementById("test").style.border= "1px solid black";
+	
+	//document.getElementById("test").display = block;
+}
+	console.log('whats up');
+</script>
+
+
+
+<table id="movieTable">
+	<tr>
+		<td class="movie">
+		Moonlight
+	</td>
+	<td>
+	Delete
+</td>
+</tr>
+
+<tr>
+	<td class="movie">
+		La La Land
+	</td>
+	<td>
+		Delete
+</td>
+</tr>
+<tr>
+	<td class="movie">
+		Little Big Soldier
+	</td>
+	<td>
+		Delete
+</td>
+</tr>
+</table>
+
+<form>
+	<p>
+		Movie Name
+	</p>
+	<input type="text" name="movieName" id="newMove">
+	<br>
+<br>
+	<button id=submission type="button">Submit</button>
+</form>
+
+<!-- JS for Deleting the Row of the movie -->
+<script>
+/*	var index;
+	var table = document.getElementById('movieTable');
+	for (var i = 0 ; i <  table.rows.length; i++) {
+			table.rows[i].cells[1].onclick= function()
+			{
+			index = this.parentElement.rowIndex;
+			table.deleteRow(index);
+			//console.log(index);
+			}		
+	} */
+	var newMovie = document.getElementById('newMove');
+	var addToList = document.getElementById('submission');
+		addToList.onclick = function(){
+			if(newMovie.value != ""){
+			console.log("submission");
+			var NewRow = table.insertRow();
+			var movie = NewRow.insertCell(0);
+			movie.className = "movie";
+			var del = NewRow.insertCell(1);
+			movie.innerHTML = newMovie.value;
+			del.innerHTML = "Delete";
+			newMovie.value = "";
+			refresh();
+			}
+			else
+				alert('Movie Name is Blank, Please Type Movie Name to add to Our Favorite Movies List');
+		}
+		//if (movieTable.cells[1].onclick == true) {
+		//	function deleteRow();
+		//}
+
+			function whatRow(x){
+			console.log("row index is:" +x.rowIndex);
+			refresh();
+		}
+
+			var index;
+	var table = document.getElementById('movieTable');
+	for (var i = 0 ; i <  table.rows.length; i++) {
+			table.rows[i].cells[1].onclick= function()
+			{
+		//	whatRow(this.parentElement);
+			index = this.parentElement.rowIndex;
+			table.deleteRow(this.rowIndex);
+			//table = document.getElementById('movieTable');
+			console.log(index);
+			}
+		}
+
+
+		function refresh(){
+						var index;
+			var table = document.getElementById('movieTable');
+				for (var i = 0 ; i <  table.rows.length; i++) {
+				table.rows[i].cells[1].onclick= function()
+				{
+					//deleteRow(this.parentElement);
+					index = this.parentElement.rowIndex;
+					table.deleteRow(index);
+			//table = document.getElementById('movieTable');
+			//console.log(index);
+			}
+		}
+
+	}
+
+	var enterKey = document.getElementById('newMove');
+	enterKey.addEventListener("keyup", function(event){
+			event.preventDefault();
+		if(event.keycode === 13){
+			console.log("Enter Key PRessed")
+			document.getElementById("submission").click();
+		}
+			
+	}
+		)
+	
+	
+		
+</script>
+
+</body>
+
+</html>
